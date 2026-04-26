@@ -7,137 +7,151 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #ff0000;
-            --text-main: #202124;
-            --text-sub: #5f6368;
-            --bg-light: #ffffff;
-            --border: #e8eaed;
+            --primary-red: #e60000;
+            --text-black: #202124;
+            --text-grey: #5f6368;
+            --bg-white: #ffffff;
+            --light-grey: #f1f3f4;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-        body { background: var(--bg-light); color: var(--text-main); padding-bottom: 70px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background: var(--bg-white); color: var(--text-black); padding-bottom: 80px; }
 
-        /* Header Style */
-        header { padding: 15px; position: sticky; top: 0; background: #fff; z-index: 1000; border-bottom: 1px solid var(--border); }
-        .logo { font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 15px; letter-spacing: -0.5px; }
-        .logo span { color: var(--primary); }
+        /* Header with Premium Style */
+        header { 
+            padding: 20px 15px; background: #fff; position: sticky; top: 0; z-index: 1000; 
+            border-bottom: 1px solid #eee; text-align: center;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #000; margin-bottom: 15px; }
+        .logo span { color: var(--primary-red); }
 
+        .search-container { padding: 0 10px; }
         .search-box { 
-            background: #f1f3f4; padding: 10px 15px; border-radius: 8px; 
-            display: flex; align-items: center;
+            background: var(--light-grey); padding: 12px 18px; border-radius: 12px; 
+            display: flex; align-items: center; border: 1px solid transparent;
         }
         .search-box input { background: transparent; border: none; width: 100%; outline: none; margin-left: 10px; font-size: 15px; }
 
-        /* Page Content Logic */
-        .page { display: none; padding: 15px; animation: fadeIn 0.3s; }
-        .page.active { display: block; }
+        /* Navigation Content */
+        .page-content { display: none; padding: 15px; animation: fadeIn 0.3s ease; }
+        .page-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .section-title { font-size: 16px; font-weight: 500; margin: 10px 0 15px; color: var(--text-main); }
+        .section-header { font-size: 17px; font-weight: 600; margin: 15px 0; color: var(--text-black); }
 
-        /* 🔥 Play Store Style Compact List */
-        .app-list { display: flex; flex-direction: column; gap: 12px; }
+        /* 🔥 Play Store Inspired Compact List */
+        .app-list { display: flex; flex-direction: column; gap: 15px; }
         .app-item { 
             display: flex; align-items: center; padding: 5px 0;
-            cursor: pointer; transition: 0.2s;
+            cursor: pointer; transition: background 0.2s;
         }
-        .app-item:active { opacity: 0.6; }
-        .app-item img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #f0f0f0; }
-        .app-details { margin-left: 15px; flex-grow: 1; border-bottom: 1px solid #f8f8f8; padding-bottom: 8px; }
-        .app-details h4 { font-size: 15px; font-weight: 400; color: #3c4043; }
-        .app-details p { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+        .app-item:active { background: #fafafa; }
+        .app-item img { 
+            width: 52px; height: 52px; border-radius: 12px; 
+            object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+        }
+        .app-details { 
+            margin-left: 15px; flex-grow: 1; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .app-info h4 { font-size: 15px; font-weight: 500; color: #3c4043; }
+        .app-info p { font-size: 12px; color: var(--text-grey); margin-top: 2px; }
+        
+        /* 🚀 New Download Icon Style */
+        .item-dl-icon { color: var(--text-grey); font-size: 16px; padding-right: 5px; }
 
-        /* Bottom Nav - 4 Items Now */
+        /* Bottom Nav - 4 Items */
         .bottom-nav { 
             position: fixed; bottom: 0; width: 100%; background: #fff; 
-            display: flex; justify-content: space-around; padding: 10px 0;
-            border-top: 1px solid var(--border); box-shadow: 0 -1px 5px rgba(0,0,0,0.02);
+            display: flex; justify-content: space-around; padding: 12px 0;
+            border-top: 1px solid #eee; box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
         }
-        .nav-btn { background: none; border: none; color: var(--text-sub); display: flex; flex-direction: column; align-items: center; font-size: 10px; flex: 1; }
-        .nav-btn i { font-size: 20px; margin-bottom: 4px; }
-        .nav-btn.active { color: var(--primary); }
-
-        /* Status Label */
-        .dl-status { font-size: 14px; text-align: center; color: var(--text-sub); margin-top: 50px; }
+        .nav-btn { 
+            background: none; border: none; color: var(--text-grey); 
+            display: flex; flex-direction: column; align-items: center; 
+            font-size: 11px; flex: 1; transition: 0.2s;
+        }
+        .nav-btn i { font-size: 22px; margin-bottom: 4px; }
+        .nav-btn.active { color: var(--primary-red); }
+        .nav-btn.active i { transform: scale(1.1); }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo">Premium <span>APK</span></div>
-    <div class="search-box">
-        <i class="fas fa-search" style="color: #5f6368;"></i>
-        <input type="text" placeholder="অ্যাপ ও গেম খুঁজুন...">
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search" style="color: #888;"></i>
+            <input type="text" placeholder="অ্যাপ ও গেম খুঁজুন...">
+        </div>
     </div>
 </header>
 
-<div id="home" class="page active">
-    <h2 class="section-title">সব অ্যাপস ও গেমস</h2>
+<div id="home" class="page-content active">
+    <h3 class="section-header">আপনার জন্য প্রস্তাবিত</h3>
     <div class="app-list">
         <div class="app-item" onclick="window.location.href='download.html?name=CapCut&size=120MB'">
             <img src="https://img.icons8.com/color/144/capcut.png">
             <div class="app-details">
-                <h4>CapCut - Video Editor</h4>
-                <p>ভিডিও এডিট • ১২০ এমবি • ৪.৮ ★</p>
+                <div class="app-info">
+                    <h4>CapCut - Video Editor</h4>
+                    <p>এডিটর • ১২০ এমবি • ৪.৮ ★</p>
+                </div>
+                <i class="fas fa-angle-right item-dl-icon"></i>
             </div>
         </div>
+
         <div class="app-item" onclick="window.location.href='download.html?name=GTA+Kishoreganj&size=1.2GB'">
             <img src="https://img.icons8.com/color/144/gta-5.png">
             <div class="app-details">
-                <h4>GTA Kishoreganj</h4>
-                <p>অ্যাকশন • ১.২ জিবি • ৫.০ ★</p>
+                <div class="app-info">
+                    <h4>GTA Kishoreganj</h4>
+                    <p>অ্যাকশন • ১.২ জিবি • ৫.০ ★</p>
+                </div>
+                <i class="fas fa-angle-right item-dl-icon"></i>
             </div>
         </div>
     </div>
 </div>
 
-<div id="games" class="page">
-    <h2 class="section-title">শুধুমাত্র গেমস</h2>
-    <div class="app-list">
-        <div class="app-item">
-            <img src="https://img.icons8.com/color/144/gta-5.png">
-            <div class="app-details">
-                <h4>GTA Kishoreganj</h4>
-                <p>অ্যাকশন • ১.২ জিবি</p>
-            </div>
-        </div>
-    </div>
-</div>
+<div id="games" class="page-content"><h3 class="section-header">সেরা গেমস</h3></div>
+<div id="apps" class="page-content"><h3 class="section-header">দরকারি অ্যাপস</h3></div>
 
-<div id="apps" class="page">
-    <h2 class="section-title">শুধুমাত্র অ্যাপস</h2>
-    <div class="app-list">
-        <div class="app-item">
-            <img src="https://img.icons8.com/color/144/capcut.png">
-            <div class="app-details">
-                <h4>CapCut Premium</h4>
-                <p>এডিটর • ১২০ এমবি</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="storage" class="page">
-    <h2 class="section-title">ডাউনলোড ফাইলসমূহ</h2>
-    <div class="dl-status">
-        <i class="fas fa-folder-open" style="font-size: 40px; margin-bottom: 10px; opacity: 0.3;"></i>
-        <p>এখানে আপনার ডাউনলোড করা ফাইলগুলো জমা হবে।</p>
+<div id="downloads" class="page-content">
+    <h3 class="section-header">ডাউনলোড করা ফাইল</h3>
+    <div style="text-align: center; margin-top: 60px; color: #999;">
+        <i class="fas fa-arrow-alt-circle-down" style="font-size: 50px; margin-bottom: 15px; opacity: 0.2;"></i>
+        <p>এখনো কোনো ফাইল ডাউনলোড করা হয়নি</p>
     </div>
 </div>
 
 <nav class="bottom-nav">
-    <button class="nav-btn active" onclick="changeTab('home', this)"><i class="fas fa-home"></i><span>হোম</span></button>
-    <button class="nav-btn" onclick="changeTab('games', this)"><i class="fas fa-gamepad"></i><span>গেমস</span></button>
-    <button class="nav-btn" onclick="changeTab('apps', this)"><i class="fas fa-th-large"></i><span>অ্যাপস</span></button>
-    <button class="nav-btn" onclick="changeTab('storage', this)"><i class="fas fa-circle-plus" style="font-size: 24px;"></i><span>ডাউনলোড</span></button>
+    <button class="nav-btn active" onclick="switchTab('home', this)">
+        <i class="fas fa-home"></i><span>হোম</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('games', this)">
+        <i class="fas fa-gamepad"></i><span>গেমস</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('apps', this)">
+        <i class="fas fa-shapes"></i><span>অ্যাপস</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('downloads', this)">
+        <i class="fas fa-download"></i><span>ডাউনলোড</span>
+    </button>
 </nav>
 
 <script>
-    function changeTab(id, btn) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    function switchTab(tabId, element) {
+        // Hide all pages
+        document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+        // Show selected page
+        document.getElementById(tabId).classList.add('active');
+        
+        // Update button state
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        element.classList.add('active');
+        
         window.scrollTo(0,0);
     }
 </script>
