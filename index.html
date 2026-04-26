@@ -3,162 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZAIYAN MODS | Premium Store</title>
+    <title>Premium APK Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #ff0000;
+            --primary: #ff1a1a;
+            --accent: #ff4d4d;
             --bg: #ffffff;
-            --card-bg: #f8f9fa;
-            --text: #202124;
-            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background: #fdfdfd; color: var(--text); padding-bottom: 90px; }
 
-        /* Header Design */
+        /* Header Style */
         header { 
-            padding: 20px; background: white; position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            padding: 25px 15px; background: #fff; position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04); border-bottom: 1px solid #f0f0f0;
         }
-        .logo { font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 15px; }
-        .logo span { color: var(--primary); text-shadow: 0 0 5px rgba(255,0,0,0.1); }
+        
+        /* 🔥 New Name Design */
+        .logo { 
+            font-size: 28px; font-weight: 900; text-align: center; margin-bottom: 20px; 
+            letter-spacing: -0.5px; display: flex; align-items: center; justify-content: center;
+        }
+        .logo .sparkle { color: gold; margin: 0 8px; font-size: 20px; }
+        .logo .premium { color: #000; }
+        .logo .apk { 
+            background: var(--primary); color: #fff; padding: 2px 10px; 
+            border-radius: 8px; margin-left: 5px; box-shadow: 0 4px 10px rgba(255,0,0,0.3);
+        }
 
         /* Search Bar */
+        .search-container { padding: 0 10px; }
         .search-box { 
-            background: #f1f3f4; padding: 12px 20px; border-radius: 30px; 
-            display: flex; align-items: center; transition: 0.3s;
+            background: #f5f5f5; padding: 12px 18px; border-radius: 15px; 
+            display: flex; align-items: center; border: 1px solid transparent; transition: 0.3s;
         }
-        .search-box:focus-within { background: #e8eaed; box-shadow: 0 0 0 2px var(--primary); }
+        .search-box:focus-within { border-color: var(--primary); background: #fff; box-shadow: 0 0 15px rgba(255,0,0,0.1); }
         .search-box input { background: transparent; border: none; width: 100%; outline: none; margin-left: 10px; font-size: 15px; }
+        .search-box i { color: #888; }
 
-        /* Banner */
+        /* Hero Banner */
         .hero {
-            margin: 15px; padding: 30px 20px;
-            background: linear-gradient(135deg, #ff0000, #990000);
-            border-radius: 20px; color: white; position: relative; overflow: hidden;
+            margin: 20px 15px; padding: 35px 25px;
+            background: linear-gradient(135deg, #ff1a1a 0%, #800000 100%);
+            border-radius: 25px; color: white; position: relative;
+            box-shadow: 0 15px 35px rgba(255, 0, 0, 0.25);
         }
-        .hero h3 { font-size: 22px; margin-bottom: 5px; }
-        .hero p { font-size: 13px; opacity: 0.9; }
+        .hero h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; }
+        .hero p { font-size: 14px; opacity: 0.9; font-weight: 300; }
 
-        /* Section Transition Logic */
-        .page-content { 
-            display: none; padding: 20px; 
-            animation: fadeIn 0.4s ease-in-out; 
-        }
+        /* Section Transition */
+        .page-content { display: none; padding: 10px 15px; animation: slideUp 0.5s ease; }
         .page-content.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* App Cards */
-        .section-title { font-size: 18px; margin-bottom: 20px; border-left: 5px solid var(--primary); padding-left: 12px; }
-        .app-grid { display: grid; gap: 15px; }
+        /* 🔥 Modern App Cards */
+        .section-title { font-size: 20px; font-weight: 800; margin: 25px 0 15px; display: flex; align-items: center; }
+        .section-title::before { content: ''; width: 6px; height: 24px; background: var(--primary); border-radius: 10px; margin-right: 12px; }
+        
+        .app-grid { display: grid; gap: 18px; }
         .app-card { 
-            background: var(--card-bg); padding: 12px; border-radius: 18px; 
-            display: flex; align-items: center; border: 1px solid #eee; transition: 0.3s;
+            background: var(--card-bg); padding: 16px; border-radius: 22px; 
+            display: flex; align-items: center; border: 1px solid #f0f0f0; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
-        .app-card:active { transform: scale(0.96); background: #fff1f1; }
-        .app-card img { width: 65px; height: 65px; border-radius: 15px; box-shadow: var(--shadow); }
-        .app-info { margin-left: 15px; flex-grow: 1; }
-        .app-info h4 { font-size: 16px; font-weight: 600; }
-        .app-info p { font-size: 12px; color: #5f6368; }
-        .dl-icon { color: var(--primary); font-size: 20px; margin-right: 10px; }
+        .app-card:active { transform: scale(0.97); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .app-card img { width: 72px; height: 72px; border-radius: 18px; object-fit: cover; border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .app-info { margin-left: 18px; flex-grow: 1; }
+        .app-info h4 { font-size: 17px; font-weight: 700; color: #111; margin-bottom: 4px; }
+        .app-info p { font-size: 12px; color: #666; font-weight: 500; }
+        .dl-icon { 
+            background: #fff0f0; color: var(--primary); width: 35px; height: 35px; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;
+        }
 
         /* Bottom Nav */
         .bottom-nav { 
-            position: fixed; bottom: 0; width: 100%; background: white; 
-            display: flex; justify-content: space-around; padding: 12px 0;
+            position: fixed; bottom: 0; width: 100%; background: rgba(255,255,255,0.95); 
+            backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 15px 0;
             border-top: 1px solid #eee; z-index: 1000;
         }
-        .nav-btn { 
-            background: none; border: none; color: #5f6368; 
-            display: flex; flex-direction: column; align-items: center; 
-            font-size: 11px; cursor: pointer; transition: 0.3s;
-        }
-        .nav-btn i { font-size: 22px; margin-bottom: 4px; }
+        .nav-btn { background: none; border: none; color: #999; display: flex; flex-direction: column; align-items: center; font-size: 11px; font-weight: 600; transition: 0.3s; }
+        .nav-btn i { font-size: 22px; margin-bottom: 5px; }
         .nav-btn.active { color: var(--primary); }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">ZAIYAN <span>MODS</span></div>
-    <div class="search-box">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="সার্চ করুন আপনার প্রিয় অ্যাপ...">
+    <div class="logo">
+        <span class="sparkle">✨</span>
+        <span class="premium">Premium</span>
+        <span class="apk">APK</span>
+        <span class="sparkle">🚀</span>
+    </div>
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="সেরা অ্যাপগুলো খুঁজুন...">
+        </div>
     </div>
 </header>
 
 <div id="home" class="page-content active">
     <div class="hero">
-        <h3>PREMIUM STORE</h3>
-        <p>সেরা সব মড অ্যাপ এবং গেমস এখন ফ্রি!</p>
+        <h3>🔥 VIP Access</h3>
+        <p>সব মড অ্যাপ এখন সরাসরি আপনার হাতে। আজীবনের জন্য ফ্রি!</p>
     </div>
-    <h2 class="section-title">জনপ্রিয় অ্যাপ</h2>
+    
+    <h2 class="section-title">সদ্য যুক্ত অ্যাপ</h2>
     <div class="app-grid">
         <div class="app-card" onclick="window.location.href='download.html?app=capcut'">
             <img src="https://img.icons8.com/color/144/capcut.png">
             <div class="app-info">
                 <h4>CapCut Premium</h4>
-                <p>ভিডিও এডিটর • ১২০ এমবি</p>
+                <p>ভিডিও এডিট • ১২০ এমবি • v10.5</p>
             </div>
-            <i class="fas fa-chevron-right dl-icon"></i>
+            <div class="dl-icon"><i class="fas fa-download"></i></div>
         </div>
     </div>
 </div>
 
 <div id="games" class="page-content">
-    <h2 class="section-title">সেরা গেমস</h2>
+    <h2 class="section-title">সেরা গেমস কালেকশন</h2>
     <div class="app-grid">
         <div class="app-card" onclick="window.location.href='download.html?app=gta'">
             <img src="https://img.icons8.com/color/144/gta-5.png">
             <div class="app-info">
                 <h4>GTA Kishoreganj</h4>
-                <p>অ্যাকশন • ১.২ জিবি</p>
+                <p>অ্যাকশন • ১.২ জিবি • ৩ডি</p>
             </div>
-            <i class="fas fa-chevron-right dl-icon"></i>
+            <div class="dl-icon"><i class="fas fa-download"></i></div>
         </div>
     </div>
 </div>
 
 <div id="apps" class="page-content">
-    <h2 class="section-title">দরকারি অ্যাপস</h2>
-    <p style="text-align: center; color: #888; padding: 50px 0;">নতুন অ্যাপ আসছে...</p>
+    <h2 class="section-title">প্রয়োজনীয় অ্যাপস</h2>
+    <div class="app-grid">
+        <p style="text-align: center; color: #888; padding: 40px;">নতুন অ্যাপ আপলোড হচ্ছে...</p>
+    </div>
 </div>
 
 <nav class="bottom-nav">
     <button class="nav-btn active" onclick="showPage('home', this)">
-        <i class="fas fa-home"></i><span>হোম</span>
+        <i class="fas fa-house"></i><span>হোম</span>
     </button>
     <button class="nav-btn" onclick="showPage('games', this)">
         <i class="fas fa-gamepad"></i><span>গেমস</span>
     </button>
     <button class="nav-btn" onclick="showPage('apps', this)">
-        <i class="fas fa-th-large"></i><span>অ্যাপস</span>
+        <i class="fas fa-layer-group"></i><span>অ্যাপস</span>
     </button>
 </nav>
 
 <script>
     function showPage(pageId, btn) {
-        // সব পেজ হাইড করা
-        document.querySelectorAll('.page-content').forEach(page => {
-            page.classList.remove('active');
-        });
-        
-        // সিলেক্টেড পেজ শো করা
+        document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
-        
-        // বাটন একটিভ করা
-        document.querySelectorAll('.nav-btn').forEach(b => {
-            b.classList.remove('active');
-        });
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        // পেজের উপরে চলে যাওয়া
         window.scrollTo(0,0);
     }
 </script>
