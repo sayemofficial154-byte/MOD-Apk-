@@ -7,163 +7,135 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #ff1a1a;
-            --accent: #ff4d4d;
-            --bg: #ffffff;
-            --card-bg: #ffffff;
-            --text: #1a1a1a;
+            --primary: #ff0000;
+            --text-main: #202124;
+            --text-sub: #5f6368;
+            --bg-light: #ffffff;
+            --border: #e8eaed;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
-        body { background: #fdfdfd; color: var(--text); padding-bottom: 90px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background: var(--bg-light); color: var(--text-main); padding-bottom: 70px; }
 
         /* Header Style */
-        header { 
-            padding: 25px 15px; background: #fff; position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04); border-bottom: 1px solid #f0f0f0;
-        }
-        
-        /* 🔥 New Name Design */
-        .logo { 
-            font-size: 28px; font-weight: 900; text-align: center; margin-bottom: 20px; 
-            letter-spacing: -0.5px; display: flex; align-items: center; justify-content: center;
-        }
-        .logo .sparkle { color: gold; margin: 0 8px; font-size: 20px; }
-        .logo .premium { color: #000; }
-        .logo .apk { 
-            background: var(--primary); color: #fff; padding: 2px 10px; 
-            border-radius: 8px; margin-left: 5px; box-shadow: 0 4px 10px rgba(255,0,0,0.3);
-        }
+        header { padding: 15px; position: sticky; top: 0; background: #fff; z-index: 1000; border-bottom: 1px solid var(--border); }
+        .logo { font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 15px; letter-spacing: -0.5px; }
+        .logo span { color: var(--primary); }
 
-        /* Search Bar */
-        .search-container { padding: 0 10px; }
         .search-box { 
-            background: #f5f5f5; padding: 12px 18px; border-radius: 15px; 
-            display: flex; align-items: center; border: 1px solid transparent; transition: 0.3s;
+            background: #f1f3f4; padding: 10px 15px; border-radius: 8px; 
+            display: flex; align-items: center;
         }
-        .search-box:focus-within { border-color: var(--primary); background: #fff; box-shadow: 0 0 15px rgba(255,0,0,0.1); }
         .search-box input { background: transparent; border: none; width: 100%; outline: none; margin-left: 10px; font-size: 15px; }
-        .search-box i { color: #888; }
 
-        /* Hero Banner */
-        .hero {
-            margin: 20px 15px; padding: 35px 25px;
-            background: linear-gradient(135deg, #ff1a1a 0%, #800000 100%);
-            border-radius: 25px; color: white; position: relative;
-            box-shadow: 0 15px 35px rgba(255, 0, 0, 0.25);
+        /* Page Content Logic */
+        .page { display: none; padding: 15px; animation: fadeIn 0.3s; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .section-title { font-size: 16px; font-weight: 500; margin: 10px 0 15px; color: var(--text-main); }
+
+        /* 🔥 Play Store Style Compact List */
+        .app-list { display: flex; flex-direction: column; gap: 12px; }
+        .app-item { 
+            display: flex; align-items: center; padding: 5px 0;
+            cursor: pointer; transition: 0.2s;
         }
-        .hero h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; }
-        .hero p { font-size: 14px; opacity: 0.9; font-weight: 300; }
+        .app-item:active { opacity: 0.6; }
+        .app-item img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #f0f0f0; }
+        .app-details { margin-left: 15px; flex-grow: 1; border-bottom: 1px solid #f8f8f8; padding-bottom: 8px; }
+        .app-details h4 { font-size: 15px; font-weight: 400; color: #3c4043; }
+        .app-details p { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
 
-        /* Section Transition */
-        .page-content { display: none; padding: 10px 15px; animation: slideUp 0.5s ease; }
-        .page-content.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* 🔥 Modern App Cards */
-        .section-title { font-size: 20px; font-weight: 800; margin: 25px 0 15px; display: flex; align-items: center; }
-        .section-title::before { content: ''; width: 6px; height: 24px; background: var(--primary); border-radius: 10px; margin-right: 12px; }
-        
-        .app-grid { display: grid; gap: 18px; }
-        .app-card { 
-            background: var(--card-bg); padding: 16px; border-radius: 22px; 
-            display: flex; align-items: center; border: 1px solid #f0f0f0; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-        }
-        .app-card:active { transform: scale(0.97); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .app-card img { width: 72px; height: 72px; border-radius: 18px; object-fit: cover; border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .app-info { margin-left: 18px; flex-grow: 1; }
-        .app-info h4 { font-size: 17px; font-weight: 700; color: #111; margin-bottom: 4px; }
-        .app-info p { font-size: 12px; color: #666; font-weight: 500; }
-        .dl-icon { 
-            background: #fff0f0; color: var(--primary); width: 35px; height: 35px; 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;
-        }
-
-        /* Bottom Nav */
+        /* Bottom Nav - 4 Items Now */
         .bottom-nav { 
-            position: fixed; bottom: 0; width: 100%; background: rgba(255,255,255,0.95); 
-            backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 15px 0;
-            border-top: 1px solid #eee; z-index: 1000;
+            position: fixed; bottom: 0; width: 100%; background: #fff; 
+            display: flex; justify-content: space-around; padding: 10px 0;
+            border-top: 1px solid var(--border); box-shadow: 0 -1px 5px rgba(0,0,0,0.02);
         }
-        .nav-btn { background: none; border: none; color: #999; display: flex; flex-direction: column; align-items: center; font-size: 11px; font-weight: 600; transition: 0.3s; }
-        .nav-btn i { font-size: 22px; margin-bottom: 5px; }
+        .nav-btn { background: none; border: none; color: var(--text-sub); display: flex; flex-direction: column; align-items: center; font-size: 10px; flex: 1; }
+        .nav-btn i { font-size: 20px; margin-bottom: 4px; }
         .nav-btn.active { color: var(--primary); }
+
+        /* Status Label */
+        .dl-status { font-size: 14px; text-align: center; color: var(--text-sub); margin-top: 50px; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">
-        <span class="sparkle">✨</span>
-        <span class="premium">Premium</span>
-        <span class="apk">APK</span>
-        <span class="sparkle">🚀</span>
-    </div>
-    <div class="search-container">
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="সেরা অ্যাপগুলো খুঁজুন...">
-        </div>
+    <div class="logo">Premium <span>APK</span></div>
+    <div class="search-box">
+        <i class="fas fa-search" style="color: #5f6368;"></i>
+        <input type="text" placeholder="অ্যাপ ও গেম খুঁজুন...">
     </div>
 </header>
 
-<div id="home" class="page-content active">
-    <div class="hero">
-        <h3>🔥 VIP Access</h3>
-        <p>সব মড অ্যাপ এখন সরাসরি আপনার হাতে। আজীবনের জন্য ফ্রি!</p>
-    </div>
-    
-    <h2 class="section-title">সদ্য যুক্ত অ্যাপ</h2>
-    <div class="app-grid">
-        <div class="app-card" onclick="window.location.href='download.html?app=capcut'">
+<div id="home" class="page active">
+    <h2 class="section-title">সব অ্যাপস ও গেমস</h2>
+    <div class="app-list">
+        <div class="app-item" onclick="window.location.href='download.html?name=CapCut&size=120MB'">
             <img src="https://img.icons8.com/color/144/capcut.png">
-            <div class="app-info">
-                <h4>CapCut Premium</h4>
-                <p>ভিডিও এডিট • ১২০ এমবি • v10.5</p>
+            <div class="app-details">
+                <h4>CapCut - Video Editor</h4>
+                <p>ভিডিও এডিট • ১২০ এমবি • ৪.৮ ★</p>
             </div>
-            <div class="dl-icon"><i class="fas fa-download"></i></div>
         </div>
-    </div>
-</div>
-
-<div id="games" class="page-content">
-    <h2 class="section-title">সেরা গেমস কালেকশন</h2>
-    <div class="app-grid">
-        <div class="app-card" onclick="window.location.href='download.html?app=gta'">
+        <div class="app-item" onclick="window.location.href='download.html?name=GTA+Kishoreganj&size=1.2GB'">
             <img src="https://img.icons8.com/color/144/gta-5.png">
-            <div class="app-info">
+            <div class="app-details">
                 <h4>GTA Kishoreganj</h4>
-                <p>অ্যাকশন • ১.২ জিবি • ৩ডি</p>
+                <p>অ্যাকশন • ১.২ জিবি • ৫.০ ★</p>
             </div>
-            <div class="dl-icon"><i class="fas fa-download"></i></div>
         </div>
     </div>
 </div>
 
-<div id="apps" class="page-content">
-    <h2 class="section-title">প্রয়োজনীয় অ্যাপস</h2>
-    <div class="app-grid">
-        <p style="text-align: center; color: #888; padding: 40px;">নতুন অ্যাপ আপলোড হচ্ছে...</p>
+<div id="games" class="page">
+    <h2 class="section-title">শুধুমাত্র গেমস</h2>
+    <div class="app-list">
+        <div class="app-item">
+            <img src="https://img.icons8.com/color/144/gta-5.png">
+            <div class="app-details">
+                <h4>GTA Kishoreganj</h4>
+                <p>অ্যাকশন • ১.২ জিবি</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="apps" class="page">
+    <h2 class="section-title">শুধুমাত্র অ্যাপস</h2>
+    <div class="app-list">
+        <div class="app-item">
+            <img src="https://img.icons8.com/color/144/capcut.png">
+            <div class="app-details">
+                <h4>CapCut Premium</h4>
+                <p>এডিটর • ১২০ এমবি</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="storage" class="page">
+    <h2 class="section-title">ডাউনলোড ফাইলসমূহ</h2>
+    <div class="dl-status">
+        <i class="fas fa-folder-open" style="font-size: 40px; margin-bottom: 10px; opacity: 0.3;"></i>
+        <p>এখানে আপনার ডাউনলোড করা ফাইলগুলো জমা হবে।</p>
     </div>
 </div>
 
 <nav class="bottom-nav">
-    <button class="nav-btn active" onclick="showPage('home', this)">
-        <i class="fas fa-house"></i><span>হোম</span>
-    </button>
-    <button class="nav-btn" onclick="showPage('games', this)">
-        <i class="fas fa-gamepad"></i><span>গেমস</span>
-    </button>
-    <button class="nav-btn" onclick="showPage('apps', this)">
-        <i class="fas fa-layer-group"></i><span>অ্যাপস</span>
-    </button>
+    <button class="nav-btn active" onclick="changeTab('home', this)"><i class="fas fa-home"></i><span>হোম</span></button>
+    <button class="nav-btn" onclick="changeTab('games', this)"><i class="fas fa-gamepad"></i><span>গেমস</span></button>
+    <button class="nav-btn" onclick="changeTab('apps', this)"><i class="fas fa-th-large"></i><span>অ্যাপস</span></button>
+    <button class="nav-btn" onclick="changeTab('storage', this)"><i class="fas fa-circle-plus" style="font-size: 24px;"></i><span>ডাউনলোড</span></button>
 </nav>
 
 <script>
-    function showPage(pageId, btn) {
-        document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
+    function changeTab(id, btn) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         window.scrollTo(0,0);
