@@ -16,9 +16,9 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: #fafafa; color: var(--text-dark); padding-bottom: 85px; }
+        body { background: #fafafa; color: var(--text-dark); padding-bottom: 85px; overflow-x: hidden; }
 
-        /* 🔥 Header & Name Design */
+        /* 🔥 Header */
         header { 
             padding: 25px 15px; background: #fff; position: sticky; top: 0; z-index: 1000; 
             border-bottom: 1px solid #f0f0f0; box-shadow: 0 2px 15px rgba(0,0,0,0.03);
@@ -30,97 +30,68 @@
         .logo span { 
             color: var(--primary); 
             background: rgba(255, 0, 0, 0.05);
-            padding: 2px 10px;
-            border-radius: 8px;
-            border: 2px solid var(--primary);
+            padding: 2px 10px; border-radius: 8px; border: 2px solid var(--primary);
         }
 
-        /* Modern Search Box */
         .search-container { padding: 0 10px; }
         .search-box { 
             background: #f1f3f4; padding: 12px 20px; border-radius: 15px; 
             display: flex; align-items: center; border: 1px solid transparent;
-            transition: var(--transition);
         }
-        .search-box:focus-within { 
-            background: #fff; border-color: var(--primary); 
-            box-shadow: 0 0 10px rgba(255,0,0,0.1); 
-        }
-        .search-box input { background: transparent; border: none; width: 100%; outline: none; margin-left: 10px; font-size: 15px; }
+        .search-box input { background: transparent; border: none; width: 100%; outline: none; margin-left: 10px; }
 
         /* ✨ Smooth Page Transitions */
-        .page { 
-            display: none; padding: 20px 15px; 
-            animation: pageSlide 0.5s ease;
-        }
+        .page { display: none; padding: 20px 15px; animation: pageSlide 0.4s ease; }
         .page.active { display: block; }
         @keyframes pageSlide {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        .section-title { 
-            font-size: 19px; font-weight: 700; margin-bottom: 20px; 
-            display: flex; align-items: center; 
-        }
-        .section-title::after { 
-            content: ''; flex: 1; height: 1px; background: #eee; margin-left: 15px;
-        }
-
-        /* 📱 Premium Home Page App Cards */
+        /* 📱 App Cards (Home) */
         .app-list { display: grid; gap: 18px; }
         .app-item { 
             background: #fff; padding: 12px; border-radius: 20px; 
             display: flex; align-items: center; text-decoration: none;
             box-shadow: var(--card-shadow); transition: var(--transition);
-            border: 1px solid #fcfcfc;
         }
-        .app-item:active { transform: scale(0.96); }
-        
-        .app-item img { 
-            width: 58px; height: 58px; border-radius: 14px; 
-            object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-        }
-        
-        .app-details { 
-            margin-left: 15px; flex-grow: 1; display: flex; 
-            justify-content: space-between; align-items: center;
-        }
-        .app-info h4 { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 3px; }
+        .app-item img { width: 58px; height: 58px; border-radius: 14px; object-fit: cover; }
+        .app-details { margin-left: 15px; flex-grow: 1; display: flex; justify-content: space-between; align-items: center; }
+        .app-info h4 { font-size: 15px; font-weight: 600; color: #1a1a1a; }
         .app-info p { font-size: 12px; color: var(--text-grey); }
-        
-        .dl-arrow { 
-            width: 32px; height: 32px; background: #fff5f5; color: var(--primary);
-            border-radius: 50%; display: flex; align-items: center; 
-            justify-content: center; font-size: 13px;
-        }
+        .dl-arrow { width: 32px; height: 32px; background: #fff5f5; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
-        /* 📍 Details View Style */
-        .details-container { text-align: center; padding: 20px; }
-        .details-container img { width: 120px; height: 120px; border-radius: 25px; margin-bottom: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .details-container h2 { font-size: 24px; margin-bottom: 5px; }
-        .details-container .meta { color: var(--text-grey); font-size: 14px; margin-bottom: 20px; }
-        .details-container .desc { text-align: left; background: #fff; padding: 20px; border-radius: 15px; line-height: 1.6; margin-bottom: 30px; }
-        .download-btn { 
-            display: block; background: var(--primary); color: #fff; padding: 18px; 
-            border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 18px;
-            box-shadow: 0 8px 20px rgba(255,0,0,0.3); transition: 0.3s;
+        /* 📍 Play Store Style Details Page */
+        .play-header { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 25px; margin-top: 10px; }
+        .play-header img { width: 90px; height: 90px; border-radius: 20px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        .play-title-box h2 { font-size: 22px; font-weight: 700; color: #202124; }
+        .play-title-box p { color: #01875f; font-weight: 600; font-size: 14px; margin-top: 2px; }
+        
+        .play-stats { display: flex; justify-content: space-around; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 15px 0; margin-bottom: 25px; }
+        .stat-item { text-align: center; border-right: 1px solid #eee; flex: 1; }
+        .stat-item:last-child { border-right: none; }
+        .stat-val { font-weight: 700; font-size: 15px; display: block; }
+        .stat-label { font-size: 11px; color: var(--text-grey); }
+
+        .play-desc-box h3 { font-size: 18px; margin-bottom: 10px; color: #202124; }
+        .play-desc-box p { font-size: 14px; color: #5f6368; line-height: 1.6; }
+
+        .play-download-btn { 
+            position: fixed; bottom: 100px; left: 15px; right: 15px;
+            background: #01875f; color: #fff; text-align: center; padding: 14px;
+            border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;
+            box-shadow: 0 4px 10px rgba(1, 135, 95, 0.3); z-index: 999;
         }
-        .download-btn:active { transform: scale(0.95); }
 
         /* 📍 Bottom Navigation */
         .bottom-nav { 
-            position: fixed; bottom: 0; width: 100%; background: rgba(255,255,255,0.95); 
-            backdrop-filter: blur(10px); display: flex; justify-content: space-around; 
+            position: fixed; bottom: 0; width: 100%; background: #fff; 
+            display: flex; justify-content: space-around; 
             padding: 12px 0; border-top: 1px solid #eee; z-index: 1000;
         }
-        .nav-btn { 
-            background: none; border: none; color: #999; 
-            display: flex; flex-direction: column; align-items: center; 
-            font-size: 11px; font-weight: 500; transition: var(--transition);
-        }
+        .nav-btn { background: none; border: none; color: #999; display: flex; flex-direction: column; align-items: center; font-size: 11px; }
         .nav-btn i { font-size: 22px; margin-bottom: 5px; }
-        .nav-btn.active { color: var(--primary); }
+        .nav-btn.active { color: #01875f; }
     </style>
 </head>
 <body>
@@ -136,9 +107,9 @@
 </header>
 
 <div id="home" class="page active">
-    <h3 class="section-title">All</h3>
+    <h3 style="font-size: 19px; margin-bottom: 20px;">Recommended</h3>
     <div class="app-list">
-        <div class="app-item" onclick="openDetails('CapCut Premium', '229MB', '24.0.0', 'https://i.postimg.cc/pdpkm1Q7/capcut-logo-on-transparent-white-background-free-vector.jpg', 'Professional video editing with all premium assets unlocked. High quality export and no watermark.', 'https://github.com/sayemofficial154-byte/MOD-Apk-/releases/download/v1.1/CapCut_24.0.0.apk')">
+        <div class="app-item" onclick="openDetails('CapCut Pro', '229MB', '24.0.0', 'https://i.postimg.cc/pdpkm1Q7/capcut-logo-on-transparent-white-background-free-vector.jpg', 'Professional video editing with all premium assets unlocked. High quality export and no watermark. Best for TikTok and Reels creators.', 'https://github.com/sayemofficial154-byte/MOD-Apk-/releases/download/v1.1/CapCut_24.0.0.apk')">
             <img src="https://i.postimg.cc/pdpkm1Q7/capcut-logo-on-transparent-white-background-free-vector.jpg">
             <div class="app-details">
                 <div class="app-info">
@@ -149,54 +120,55 @@
             </div>
         </div>
     </div>
- 
+</div>
+
 <div id="details-page" class="page">
-    <div class="details-container">
-        <div style="text-align: left; margin-bottom: 20px;">
-            <i class="fas fa-arrow-left" style="font-size: 20px; cursor: pointer;" onclick="switchTab('home', document.querySelector('.nav-btn'))"></i>
-        </div>
+    <div style="margin-bottom: 20px;">
+        <i class="fas fa-arrow-left" style="font-size: 20px; cursor: pointer;" onclick="switchTab('home', document.querySelector('.nav-btn'))"></i>
+    </div>
+
+    <div class="play-header">
         <img id="app-icon" src="">
-        <h2 id="app-name"></h2>
-        <div class="meta" id="app-meta"></div>
-        <div class="desc">
-            <strong>About this app</strong><br>
-            <p id="app-description" style="margin-top:10px; color:#555;"></p>
+        <div class="play-title-box">
+            <h2 id="app-name"></h2>
+            <p id="app-dev">Premium Modder</p>
+            <p style="color:#5f6368; font-weight: 400;">Contains ads • In-app purchases</p>
         </div>
-        <a href="" id="download-link" class="download-btn">Download APK</a>
     </div>
-</div>
 
-<div id="games" class="page">
-    <h3 class="section-title">Best Games</h3>
-    <div class="app-list"></div>
-</div>
-
-<div id="apps" class="page">
-    <h3 class="section-title">New Apps</h3>
-    <div class="app-list"></div>
-</div>
-
-<div id="downloads" class="page">
-    <h3 class="section-title">Downloads</h3>
-    <div style="text-align: center; margin-top: 80px; color: #bbb;">
-        <i class="fas fa-cloud-download-alt" style="font-size: 50px; margin-bottom: 15px; opacity: 0.3;"></i>
-        <p>No downloads available</p>
+    <div class="play-stats">
+        <div class="stat-item">
+            <span class="stat-val">4.9 ★</span>
+            <span class="stat-label">1M reviews</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-val" id="app-size-stat"></span>
+            <span class="stat-label">Download size</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-val">Everyone</span>
+            <span class="stat-label">Rated for 3+</span>
+        </div>
     </div>
+
+    <div class="play-desc-box">
+        <h3>About this app</h3>
+        <p id="app-description"></p>
+        <div style="margin-top: 20px; color: #01875f; font-weight: 600;">Video Players & Editors</div>
+    </div>
+
+    <a href="" id="download-link" class="play-download-btn">Install</a>
 </div>
+
+<div id="games" class="page"><h3>Best Games</h3></div>
+<div id="apps" class="page"><h3>New Apps</h3></div>
+<div id="downloads" class="page"><h3>Downloads</h3></div>
 
 <nav class="bottom-nav">
-    <button class="nav-btn active" onclick="switchTab('home', this)">
-        <i class="fas fa-house"></i><span>Home</span>
-    </button>
-    <button class="nav-btn" onclick="switchTab('games', this)">
-        <i class="fas fa-gamepad"></i><span>Games</span>
-    </button>
-    <button class="nav-btn" onclick="switchTab('apps', this)">
-        <i class="fas fa-border-all"></i><span>Apps</span>
-    </button>
-    <button class="nav-btn" onclick="switchTab('downloads', this)">
-        <i class="fas fa-arrow-circle-down"></i><span>Downloads</span>
-    </button>
+    <button class="nav-btn active" onclick="switchTab('home', this)"><i class="fas fa-house"></i><span>Home</span></button>
+    <button class="nav-btn" onclick="switchTab('games', this)"><i class="fas fa-gamepad"></i><span>Games</span></button>
+    <button class="nav-btn" onclick="switchTab('apps', this)"><i class="fas fa-border-all"></i><span>Apps</span></button>
+    <button class="nav-btn" onclick="switchTab('downloads', this)"><i class="fas fa-arrow-circle-down"></i><span>Downloads</span></button>
 </nav>
 
 <script>
@@ -206,20 +178,15 @@
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         if(btn) btn.classList.add('active');
         
-        // Header visibility logic
-        if(id === 'details-page') {
-            document.getElementById('main-header').style.display = 'none';
-        } else {
-            document.getElementById('main-header').style.display = 'block';
-        }
-        
+        // Hide Header on Details Page
+        document.getElementById('main-header').style.display = (id === 'details-page') ? 'none' : 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function openDetails(name, size, ver, icon, desc, link) {
         document.getElementById('app-name').innerText = name;
         document.getElementById('app-icon').src = icon;
-        document.getElementById('app-meta').innerText = "Version: " + ver + " | Size: " + size;
+        document.getElementById('app-size-stat').innerText = size;
         document.getElementById('app-description').innerText = desc;
         document.getElementById('download-link').href = link;
         
@@ -228,4 +195,4 @@
 </script>
 
 </body>
-        </html>
+</html>
