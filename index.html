@@ -6,95 +6,238 @@
     <title>PREMIUM APK STORE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #ff0000; --bg: #ffffff; --text-dark: #202124; }
+        :root {
+            --primary: #ff0000;
+            --bg: #ffffff;
+            --text-dark: #202124;
+            --text-grey: #5f6368;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: #fafafa; color: var(--text-dark); padding-bottom: 85px; }
 
-        /* Header */
-        header { padding: 25px 15px; background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; text-align: center; }
-        .logo { font-size: 26px; font-weight: 900; text-transform: uppercase; }
-        .logo span { color: var(--primary); border: 2px solid var(--primary); padding: 2px 10px; border-radius: 8px; }
+        /* 🔥 Header & Name Design */
+        header { 
+            padding: 25px 15px; background: #fff; position: sticky; top: 0; z-index: 1000; 
+            border-bottom: 1px solid #f0f0f0; box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+        }
+        .logo { 
+            font-size: 26px; font-weight: 900; text-align: center; margin-bottom: 20px; 
+            letter-spacing: 1.5px; text-transform: uppercase;
+        }
+        .logo span { 
+            color: var(--primary); 
+            background: rgba(255, 0, 0, 0.05);
+            padding: 2px 10px;
+            border-radius: 8px;
+            border: 2px solid var(--primary);
+        }
 
-        /* Pages */
-        .page { display: none; padding: 20px 15px; }
+        /* Modern Search Box */
+        .search-container { padding: 0 10px; }
+        .search-box { 
+            background: #f1f3f4; padding: 12px 20px; border-radius: 15px; 
+            display: flex; align-items: center; border: 1px solid transparent;
+            transition: var(--transition);
+        }
+        .search-box:focus-within { 
+            background: #fff; border-color: var(--primary); 
+            box-shadow: 0 0 10px rgba(255,0,0,0.1); 
+        }
+        .search-box input { background: transparent; border: none; width: 100%; outline: none; margin-left: 10px; font-size: 15px; }
+
+        /* ✨ Smooth Page Transitions */
+        .page { 
+            display: none; padding: 20px 15px; 
+            animation: pageSlide 0.5s ease;
+        }
         .page.active { display: block; }
+        @keyframes pageSlide {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        /* App Card Style */
+        .section-title { 
+            font-size: 19px; font-weight: 700; margin-bottom: 20px; 
+            display: flex; align-items: center; 
+        }
+        .section-title::after { 
+            content: ''; flex: 1; height: 1px; background: #eee; margin-left: 15px;
+        }
+
+        /* 📱 Premium Home Page App Cards */
+        .app-list { display: grid; gap: 18px; }
         .app-item { 
-            background: #fff; padding: 15px; border-radius: 20px; 
-            display: flex; align-items: center; margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: #fff; padding: 12px; border-radius: 20px; 
+            display: flex; align-items: center; text-decoration: none;
+            box-shadow: var(--card-shadow); transition: var(--transition);
+            border: 1px solid #fcfcfc;
         }
-        .app-item img { width: 60px; height: 60px; border-radius: 12px; margin-right: 15px; }
-        .app-info { flex-grow: 1; }
-        .dl-btn { background: #fff5f5; color: var(--primary); padding: 10px; border-radius: 50%; }
-
-        /* Details View */
-        .details-view { text-align: center; }
-        .details-view img { width: 100px; height: 100px; border-radius: 20px; margin-bottom: 20px; }
-        .download-now { 
-            display: inline-block; background: var(--primary); color: #fff; 
-            padding: 15px 40px; border-radius: 30px; text-decoration: none; 
-            font-weight: bold; margin-top: 20px; 
+        .app-item:active { transform: scale(0.96); }
+        
+        .app-item img { 
+            width: 58px; height: 58px; border-radius: 14px; 
+            object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        }
+        
+        .app-details { 
+            margin-left: 15px; flex-grow: 1; display: flex; 
+            justify-content: space-between; align-items: center;
+        }
+        .app-info h4 { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 3px; }
+        .app-info p { font-size: 12px; color: var(--text-grey); }
+        
+        .dl-arrow { 
+            width: 32px; height: 32px; background: #fff5f5; color: var(--primary);
+            border-radius: 50%; display: flex; align-items: center; 
+            justify-content: center; font-size: 13px;
         }
 
-        /* Nav */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 15px; border-top: 1px solid #eee; }
-        .nav-btn { background: none; border: none; color: #999; display: flex; flex-direction: column; align-items: center; }
+        /* 📍 Details View Style */
+        .details-container { text-align: center; padding: 20px; }
+        .details-container img { width: 120px; height: 120px; border-radius: 25px; margin-bottom: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .details-container h2 { font-size: 24px; margin-bottom: 5px; }
+        .details-container .meta { color: var(--text-grey); font-size: 14px; margin-bottom: 20px; }
+        .details-container .desc { text-align: left; background: #fff; padding: 20px; border-radius: 15px; line-height: 1.6; margin-bottom: 30px; }
+        .download-btn { 
+            display: block; background: var(--primary); color: #fff; padding: 18px; 
+            border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 18px;
+            box-shadow: 0 8px 20px rgba(255,0,0,0.3); transition: 0.3s;
+        }
+        .download-btn:active { transform: scale(0.95); }
+
+        /* 📍 Bottom Navigation */
+        .bottom-nav { 
+            position: fixed; bottom: 0; width: 100%; background: rgba(255,255,255,0.95); 
+            backdrop-filter: blur(10px); display: flex; justify-content: space-around; 
+            padding: 12px 0; border-top: 1px solid #eee; z-index: 1000;
+        }
+        .nav-btn { 
+            background: none; border: none; color: #999; 
+            display: flex; flex-direction: column; align-items: center; 
+            font-size: 11px; font-weight: 500; transition: var(--transition);
+        }
+        .nav-btn i { font-size: 22px; margin-bottom: 5px; }
         .nav-btn.active { color: var(--primary); }
     </style>
 </head>
 <body>
 
-<header>
+<header id="main-header">
     <div class="logo">PREMIUM <span>APK</span></div>
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search apps and games...">
+        </div>
+    </div>
 </header>
 
 <div id="home" class="page active">
-    <h3 style="margin-bottom:20px;">Recommended</h3>
-    <div class="app-item" onclick="showDetails('CapCut Pro', '229 MB', '24.0.0', 'https://img.icons8.com/color/144/capcut.png', 'Best premium video editor.', 'https://github.com/sayemofficial154-byte/MOD-Apk-/releases/download/v1.1/CapCut_24.0.0.apk')">
-        <img src="https://img.icons8.com/color/144/capcut.png">
-        <div class="app-info">
-            <h4>CapCut Pro</h4>
-            <p>Editor • 229 MB</p>
+    <h3 class="section-title">Recommended</h3>
+    <div class="app-list">
+        <div class="app-item" onclick="openDetails('CapCut Pro', '229MB', '24.0.0', 'https://i.postimg.cc/pdpkm1Q7/capcut-logo-on-transparent-white-background-free-vector.jpg', 'Professional video editing with all premium assets unlocked. High quality export and no watermark.', 'https://github.com/sayemofficial154-byte/MOD-Apk-/releases/download/v1.1/CapCut_24.0.0.apk')">
+            <img src="https://i.postimg.cc/pdpkm1Q7/capcut-logo-on-transparent-white-background-free-vector.jpg">
+            <div class="app-details">
+                <div class="app-info">
+                    <h4>CapCut Pro</h4>
+                    <p>Editor • 229 MB • 4.9 ★</p>
+                </div>
+                <div class="dl-arrow"><i class="fas fa-arrow-down"></i></div>
+            </div>
         </div>
-        <div class="dl-btn"><i class="fas fa-arrow-down"></i></div>
+        
+        <div class="app-item" onclick="openDetails('GTA Kishoreganj', '1.2GB', 'v1.0', 'https://img.icons8.com/color/144/gta-5.png', 'Experience the thrill of GTA in the streets of Kishoreganj.', '#')">
+            <img src="https://img.icons8.com/color/144/gta-5.png">
+            <div class="app-details">
+                <div class="app-info">
+                    <h4>GTA Kishoreganj</h4>
+                    <p>Action • 1.2 GB • 5.0 ★</p>
+                </div>
+                <div class="dl-arrow"><i class="fas fa-arrow-down"></i></div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div id="details" class="page">
-    <button onclick="switchTab('home')" style="border:none; background:none; color:var(--primary); margin-bottom:20px;"><i class="fas fa-arrow-left"></i> Back</button>
-    <div class="details-view">
-        <img id="det-icon" src="">
-        <h2 id="det-name"></h2>
-        <p id="det-info" style="color:#888; margin-top:5px;"></p>
-        <hr style="margin:20px 0; opacity:0.1;">
-        <p id="det-desc"></p>
-        <a id="det-link" href="#" class="download-now">Download Now</a>
+<div id="details-page" class="page">
+    <div class="details-container">
+        <div style="text-align: left; margin-bottom: 20px;">
+            <i class="fas fa-arrow-left" style="font-size: 20px; cursor: pointer;" onclick="switchTab('home', document.querySelector('.nav-btn'))"></i>
+        </div>
+        <img id="app-icon" src="">
+        <h2 id="app-name"></h2>
+        <div class="meta" id="app-meta"></div>
+        <div class="desc">
+            <strong>About this app</strong><br>
+            <p id="app-description" style="margin-top:10px; color:#555;"></p>
+        </div>
+        <a href="" id="download-link" class="download-btn">Download APK</a>
+    </div>
+</div>
+
+<div id="games" class="page">
+    <h3 class="section-title">Best Games</h3>
+    <div class="app-list"></div>
+</div>
+
+<div id="apps" class="page">
+    <h3 class="section-title">New Apps</h3>
+    <div class="app-list"></div>
+</div>
+
+<div id="downloads" class="page">
+    <h3 class="section-title">Downloads</h3>
+    <div style="text-align: center; margin-top: 80px; color: #bbb;">
+        <i class="fas fa-cloud-download-alt" style="font-size: 50px; margin-bottom: 15px; opacity: 0.3;"></i>
+        <p>No downloads available</p>
     </div>
 </div>
 
 <nav class="bottom-nav">
-    <button class="nav-btn active" onclick="switchTab('home')"><i class="fas fa-house"></i><span>Home</span></button>
-    <button class="nav-btn"><i class="fas fa-gamepad"></i><span>Games</span></button>
-    <button class="nav-btn"><i class="fas fa-arrow-circle-down"></i><span>Downloads</span></button>
+    <button class="nav-btn active" onclick="switchTab('home', this)">
+        <i class="fas fa-house"></i><span>Home</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('games', this)">
+        <i class="fas fa-gamepad"></i><span>Games</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('apps', this)">
+        <i class="fas fa-border-all"></i><span>Apps</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('downloads', this)">
+        <i class="fas fa-arrow-circle-down"></i><span>Downloads</span>
+    </button>
 </nav>
 
 <script>
-    function switchTab(id) {
+    function switchTab(id, btn) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+        
+        // Header visibility logic
+        if(id === 'details-page') {
+            document.getElementById('main-header').style.display = 'none';
+        } else {
+            document.getElementById('main-header').style.display = 'block';
+        }
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function showDetails(name, size, ver, icon, desc, link) {
-        document.getElementById('det-name').innerText = name;
-        document.getElementById('det-info').innerText = ver + " • " + size;
-        document.getElementById('det-desc').innerText = desc;
-        document.getElementById('det-icon').src = icon;
-        document.getElementById('det-link').href = link;
-        switchTab('details');
+    function openDetails(name, size, ver, icon, desc, link) {
+        document.getElementById('app-name').innerText = name;
+        document.getElementById('app-icon').src = icon;
+        document.getElementById('app-meta').innerText = "Version: " + ver + " | Size: " + size;
+        document.getElementById('app-description').innerText = desc;
+        document.getElementById('download-link').href = link;
+        
+        switchTab('details-page');
     }
 </script>
 
 </body>
-</html>
+        </html>
