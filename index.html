@@ -125,17 +125,18 @@
 <div id="home" class="page active">
     <h3 class="section-title">Recommended</h3>
     <div class="app-list">
-        <div class="app-item" onclick="window.location.href='download.html?name=CapCut&size=120MB'">
+        <div class="app-item" onclick="goToDetails('CapCut Pro', '229 MB', '24.0.0', 'https://img.icons8.com/color/144/capcut.png', 'Best premium video editor with all features unlocked.', 'https://github.com/sayemofficial154-byte/MOD-Apk-/releases/download/v1.1/CapCut_24.0.0.apk')">
             <img src="https://img.icons8.com/color/144/capcut.png">
             <div class="app-details">
                 <div class="app-info">
                     <h4>CapCut Pro</h4>
-                    <p>Editor • 120 MB • 4.8 ★</p>
+                    <p>Editor • 229 MB • 4.9 ★</p>
                 </div>
                 <div class="dl-arrow"><i class="fas fa-arrow-down"></i></div>
             </div>
         </div>
-        <div class="app-item" onclick="window.location.href='download.html?name=GTA+Kishoreganj&size=1.2GB'">
+        
+        <div class="app-item" onclick="goToDetails('GTA Kishoreganj', '1.2 GB', 'v1.0', 'https://img.icons8.com/color/144/gta-5.png', 'Explore the open world of Kishoreganj.', '#')">
             <img src="https://img.icons8.com/color/144/gta-5.png">
             <div class="app-details">
                 <div class="app-info">
@@ -150,14 +151,12 @@
 
 <div id="games" class="page">
     <h3 class="section-title">Best Games</h3>
-    <div class="app-list">
-        </div>
+    <div class="app-list"></div>
 </div>
 
 <div id="apps" class="page">
     <h3 class="section-title">New Apps</h3>
-    <div class="app-list">
-        </div>
+    <div class="app-list"></div>
 </div>
 
 <div id="downloads" class="page">
@@ -190,6 +189,12 @@
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Function to handle the details page redirection with app info
+    function goToDetails(name, size, ver, icon, desc, link) {
+        const url = `details.html?name=${encodeURIComponent(name)}&size=${size}&ver=${ver}&icon=${encodeURIComponent(icon)}&desc=${encodeURIComponent(desc)}&link=${encodeURIComponent(link)}`;
+        window.location.href = url;
     }
 </script>
 
