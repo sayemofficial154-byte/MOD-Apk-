@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,118 +7,126 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #ff0000;
-            --bg-red: #d00000;
+            --bg-red: #ff0000;
+            --dark-red: #cc0000;
             --white: #ffffff;
         }
 
-        /* 🌸 ছবির মতো ব্যাকগ্রাউন্ড ডিজাইন */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
         body { 
-            background-color: var(--bg-red);
-            background-image: 
-                url('https://www.transparenttextures.com/patterns/floral-paper.png'), /* হালকা ফ্লোরাল টেক্সচার */
-                linear-gradient(45deg, #ff0000 25%, #d00000 100%);
-            color: var(--white);
+            background: var(--bg-red); 
+            color: var(--white); 
             min-height: 100vh;
-            margin: 0;
-            padding-bottom: 90px;
-            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            padding-bottom: 80px;
             position: relative;
         }
 
-        /* কোণায় কোণায় ফুল-পাতার নকশা (আপনার ছবির মতো) */
-        body::before, body::after {
-            content: "";
+        /* 🌸 SVG লতা-পাতা ডিজাইন (ছবির মতো কোণায় থাকবে) */
+        .floral {
             position: fixed;
-            width: 200px;
-            height: 200px;
-            background-image: url('https://i.postimg.cc/85zXzXzP/floral-element.png'); /* লতাপাতার ভেক্টর */
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.4;
+            width: 250px;
+            height: 250px;
+            z-index: -1;
+            opacity: 0.5;
             pointer-events: none;
-            z-index: 1;
         }
-        body::before { top: 0; left: 0; transform: rotate(0deg); }
-        body::after { bottom: 80px; right: 0; transform: rotate(180deg); }
+        .top-left { top: 0; left: 0; }
+        .bottom-right { bottom: 80px; right: 0; transform: rotate(180deg); }
 
-        * { box-sizing: border-box; }
-
-        /* 🔥 Header Design */
         header { 
             padding: 30px 15px; 
-            background: rgba(179, 0, 0, 0.9);
-            text-align: center;
-            border-bottom: 2px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(5px);
-            position: sticky; top: 0; z-index: 1000;
-        }
-        .header-title {
-            font-size: 24px; font-weight: 900;
-            text-transform: uppercase; letter-spacing: 2px;
-            margin-bottom: 20px;
+            text-align: center; 
+            background: linear-gradient(to bottom, var(--dark-red), var(--bg-red));
         }
 
-        /* 🔎 Search Box (Functional) */
+        .header-title {
+            font-size: 26px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        /* 🔎 সার্চ বক্স (Tap to Search Logic) */
         .search-container {
-            display: flex; background: #fff;
-            border-radius: 50px; padding: 5px 5px 5px 20px;
-            max-width: 90%; margin: 0 auto;
+            display: flex;
+            background: var(--white);
+            border-radius: 50px;
+            padding: 6px 6px 6px 20px;
+            max-width: 90%;
+            margin: 0 auto;
         }
+
         .search-container input {
-            background: transparent; border: none; color: #000; flex: 1; outline: none; font-size: 15px;
+            background: transparent; border: none; color: #000; flex: 1; outline: none; font-size: 16px;
         }
+
         .search-btn {
             background: #000; color: #fff; border: none;
-            width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+            width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
         }
 
-        /* 📱 App Cards with Shadow */
-        .page { display: none; padding: 20px; position: relative; z-index: 2; }
-        .page.active { display: block; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* 📱 অ্যাপ কার্ড ডিজাইন (শ্যাডোসহ) */
+        .page { padding: 20px; display: none; }
+        .page.active { display: block; animation: fadeIn 0.4s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
         .app-item { 
-            background: rgba(255, 255, 255, 0.15); 
+            background: rgba(255, 255, 255, 0.1); 
             backdrop-filter: blur(10px);
-            padding: 18px; border-radius: 25px; 
-            display: flex; align-items: center; margin-bottom: 20px;
+            padding: 18px; 
+            border-radius: 25px; 
+            display: flex; 
+            align-items: center; 
+            margin-bottom: 18px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
             cursor: pointer;
         }
-        .app-item img { width: 70px; height: 70px; border-radius: 18px; border: 2px solid #fff; }
+
+        .app-item img { width: 70px; height: 70px; border-radius: 18px; border: 2px solid white; }
         .app-content { margin-left: 15px; flex: 1; }
-        .app-content h4 { font-size: 18px; margin-bottom: 3px; }
+        .app-content h4 { font-size: 18px; font-weight: 700; }
         .app-content p { font-size: 12px; opacity: 0.9; }
 
-        /* 📍 Details View */
-        .details-box { text-align: center; }
+        /* 📍 ডাউনলোড ডিটেইলস পেজ */
+        .feature-list { text-align: left; margin: 25px 0; }
         .feature-card {
             background: rgba(255, 255, 255, 0.1);
-            padding: 12px; border-radius: 12px; margin-bottom: 8px;
-            text-align: left; display: flex; align-items: center; gap: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .download-btn {
-            background: #fff; color: #ff0000; text-align: center;
-            padding: 18px; border-radius: 50px; text-decoration: none;
-            font-weight: 900; display: block; margin-top: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            padding: 12px; border-radius: 15px; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* 📍 Nav Bar */
-        .bottom-nav { 
-            position: fixed; bottom: 0; width: 100%; background: #b30000; 
-            display: flex; justify-content: space-around; 
-            padding: 15px 0; border-top: 1px solid rgba(255,255,255,0.2); z-index: 2000;
+        .download-btn {
+            background: var(--white); color: var(--bg-red);
+            text-align: center; padding: 18px; border-radius: 50px;
+            text-decoration: none; font-weight: 900; display: block;
+            margin-top: 25px; text-transform: uppercase;
         }
-        .nav-btn { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 11px; flex: 1; cursor: pointer; }
-        .nav-btn i { font-size: 22px; display: block; margin-bottom: 5px; }
-        .nav-btn.active { color: #fff; font-weight: bold; }
+
+        /* 📍 নিচের মেনু বার */
+        .bottom-nav { 
+            position: fixed; bottom: 0; width: 100%; background: var(--dark-red); 
+            display: flex; justify-content: space-around; 
+            padding: 15px 0; border-top: 1px solid rgba(255,255,255,0.1); z-index: 1000;
+        }
+        .nav-btn { background: none; border: none; color: rgba(255,255,255,0.5); display: flex; flex-direction: column; align-items: center; font-size: 12px; flex: 1; }
+        .nav-btn i { font-size: 24px; margin-bottom: 5px; }
+        .nav-btn.active { color: var(--white); font-weight: bold; }
     </style>
 </head>
 <body>
+
+<svg class="floral top-left" viewBox="0 0 200 200" fill="white">
+    <path d="M0,0 Q50,0 50,50 T100,100 M0,50 Q25,50 25,75 T50,100 M50,0 Q50,25 75,25 T100,50" stroke="white" stroke-width="2" fill="none" opacity="0.3"/>
+    <circle cx="20" cy="20" r="5" opacity="0.4"/><circle cx="60" cy="40" r="3" opacity="0.4"/>
+</svg>
+<svg class="floral bottom-right" viewBox="0 0 200 200" fill="white">
+    <path d="M0,0 Q50,0 50,50 T100,100 M0,50 Q25,50 25,75 T50,100 M50,0 Q50,25 75,25 T100,50" stroke="white" stroke-width="2" fill="none" opacity="0.3"/>
+</svg>
 
 <header id="main-header">
     <div class="header-title">PREMIUM PLAY STORE</div>
@@ -130,8 +138,8 @@
 
 <div id="home" class="page active">
     <h3 style="margin-bottom: 20px;">Top Recommended</h3>
-    <div class="app-list" id="mainList">
-        <div class="app-item" onclick="openDetails('CapCut Pro', '229MB', 'https://i.postimg.cc/pdpkm1Q7/capcut-logo-on-transparent-white-background-free-vector.jpg', 'CapCut Pro gives you the best video editing experience with no limits.', 'https://github.com/sayemofficial154-byte/MOD-Apk-/releases/download/v1.1/CapCut_24.0.0.apk')">
+    <div class="app-list">
+        <div class="app-item" onclick="openDetails('CapCut Pro', '229MB', 'https://i.postimg.cc/pdpkm1Q7/capcut-logo-on-transparent-white-background-free-vector.jpg', 'CapCut Pro is the best video editor with all premium features unlocked.', 'https://github.com/sayemofficial154-byte/MOD-Apk-/releases/download/v1.1/CapCut_24.0.0.apk')">
             <img src="https://i.postimg.cc/pdpkm1Q7/capcut-logo-on-transparent-white-background-free-vector.jpg">
             <div class="app-content"><h4>CapCut Pro</h4><p>Premium Mod • 229 MB</p></div>
             <i class="fas fa-download"></i>
@@ -140,19 +148,24 @@
 </div>
 
 <div id="apps" class="page">
-    <h3 style="margin-bottom: 20px;">All Apps</h3>
+    <h3 style="margin-bottom: 20px;">Apps Section</h3>
+    <div class="app-list">
+        <div class="app-item" onclick="openDetails('CapCut Pro', '229MB', 'https://i.postimg.cc/pdpkm1Q7/capcut-logo-on-transparent-white-background-free-vector.jpg', 'CapCut Pro is the best video editor with all premium features unlocked.', 'https://github.com/sayemofficial154-byte/MOD-Apk-/releases/download/v1.1/CapCut_24.0.0.apk')">
+            <img src="https://i.postimg.cc/pdpkm1Q7/capcut-logo-on-transparent-white-background-free-vector.jpg">
+            <div class="app-content"><h4>CapCut Pro</h4><p>Premium Mod • 229 MB</p></div>
+            <i class="fas fa-download"></i>
+        </div>
     </div>
-
-<div id="games" class="page">
-    <center style="margin-top: 50px;">No Games Found!</center>
 </div>
 
+<div id="games" class="page"><center style="margin-top:50px;">Coming Soon...</center></div>
+
 <div id="details-page" class="page">
-    <i class="fas fa-arrow-left" style="font-size: 24px; cursor: pointer;" onclick="switchTab('home', document.getElementById('home-btn'))"></i>
-    <div class="details-box">
-        <img id="app-icon" src="" style="width: 100px; height: 100px; border-radius: 20px; border: 3px solid #fff; margin: 20px 0;">
-        <h2 id="app-name"></h2>
-        <div style="margin: 20px 0; text-align: left;">
+    <i class="fas fa-arrow-left" style="font-size: 24px; cursor: pointer; margin-bottom: 20px;" onclick="switchTab('home', document.getElementById('home-btn'))"></i>
+    <div style="text-align: center;">
+        <img id="app-icon" src="" style="width: 100px; height: 100px; border-radius: 20px; border: 3px solid white;">
+        <h2 id="app-name" style="margin-top: 15px;"></h2>
+        <div class="feature-list">
             <div class="feature-card"><i class="fas fa-check-circle"></i> Network Error Fix.</div>
             <div class="feature-card"><i class="fas fa-check-circle"></i> All devices Working.</div>
             <div class="feature-card"><i class="fas fa-check-circle"></i> Prem!um Features Unl0cked.</div>
@@ -160,15 +173,14 @@
             <div class="feature-card"><i class="fas fa-check-circle"></i> Video Export Problem Fixed.</div>
             <div class="feature-card"><i class="fas fa-check-circle"></i> Ads Rem0ve.</div>
         </div>
-        <p id="app-description" style="font-size: 14px; opacity: 0.9; text-align: left;"></p>
-        <a href="" id="download-link" class="download-btn">Download APK Now</a>
+        <a href="" id="download-link" class="download-btn">Download Now</a>
     </div>
 </div>
 
 <nav class="bottom-nav">
-    <button id="home-btn" class="nav-btn active" onclick="switchTab('home', this)"><i class="fas fa-home"></i>Home</button>
-    <button class="nav-btn" onclick="switchTab('apps', this)"><i class="fas fa-th-large"></i>Apps</button>
-    <button class="nav-btn" onclick="switchTab('games', this)"><i class="fas fa-gamepad"></i>Games</button>
+    <button id="home-btn" class="nav-btn active" onclick="switchTab('home', this)"><i class="fas fa-home"></i><span>Home</span></button>
+    <button class="nav-btn" onclick="switchTab('apps', this)"><i class="fas fa-th-large"></i><span>Apps</span></button>
+    <button class="nav-btn" onclick="switchTab('games', this)"><i class="fas fa-gamepad"></i><span>Games</span></button>
 </nav>
 
 <script>
@@ -184,7 +196,6 @@
     function openDetails(name, size, icon, desc, link) {
         document.getElementById('app-name').innerText = name;
         document.getElementById('app-icon').src = icon;
-        document.getElementById('app-description').innerText = desc;
         document.getElementById('download-link').href = link;
         switchTab('details-page');
     }
@@ -196,6 +207,5 @@
         });
     }
 </script>
-
 </body>
 </html>
